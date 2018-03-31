@@ -28,6 +28,9 @@ public class GooglePlaces {
     private static final String PLACES_TEXT_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/search/json?";
     private static final String PLACES_DETAILS_URL = "https://maps.googleapis.com/maps/api/place/details/json?";
 
+    // Custom URLs
+    private static final String PLACES_POPULARTIMES_URL = "http://172.27.97.59:8080/get_popular_for_id?";
+
     private double _latitude;
     private double _longitude;
     private double _radius;
@@ -93,6 +96,22 @@ public class GooglePlaces {
         } catch (HttpResponseException e) {
             Log.e("Error in Perform Detail", e.getMessage());
             throw e;
+        }
+    }
+
+    public PopularTimes getPlacePopularTimes(String place_id) {
+        try {
+            HttpRequestFactory httpRequestFactory = createRequestFactory(HTTP_TRANSPORT);
+            HttpRequest request = httpRequestFactory
+                    .buildGetRequest(new GenericUrl(PLACES_POPULARTIMES_URL));
+            request.url.put("place_id", place_id);
+
+            PopularTimes pop = request.execute().parseAs(PopularTimes.class);
+
+            return pop;
+        } catch (Exception e) {
+            Log.e("PopularTimes", "Error calling api" + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
