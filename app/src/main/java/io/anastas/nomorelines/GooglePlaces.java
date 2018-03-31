@@ -29,7 +29,7 @@ public class GooglePlaces {
     private static final String PLACES_DETAILS_URL = "https://maps.googleapis.com/maps/api/place/details/json?";
 
     // Custom URLs
-    private static final String PLACES_POPULARTIMES_URL = "http://172.27.97.59:8080/get_popular_for_id?";
+    private static final String PLACES_POPULARTIMES_URL = "https://nomorelines.anastas.io/get_popular_for_id?";
 
     private double _latitude;
     private double _longitude;
